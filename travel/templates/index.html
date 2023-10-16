@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block header %}
+
+        <!-- search form -->
+        <div class="container">
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-6">
+                    <form class="form-inline d-flex flex-nowrap" action="{{ url_for('main.search') }}" >
+                        <input type="text" name="search" class="form-control flex-grow-1 my-1 mr-sm-2" id="SearchForm">
+                        <button type="submit" class="flex-shrink-1 btn btn-primary my-1">Submit</button>
+                        </form>
+                        
+                </div>
+                <div class="col-3"></div>
+            </div>
+        </div>
+    
+
+        <!--Jumbotron-->
+        <div class="p-5 mb-4 bg-light rounded-3">
+            <div class="container-fluid py-5 jumbo">
+                <h1 class="display-5 fw-bold">
+                    {% if current_user.is_authenticated %}
+                        <h1>Welcome back {{current_user.name}}!</h1>
+                    {% else %}
+                        <h1>Walsh</h1>
+                    {% endif %}
+                </h1>
+                <p class="col-md-8 fs-4">Discover the World with Walsh: Your Journey, Your Way!</p>
+                <button class="btn btn-primary btn-lg" type="button">Yes Way!</button>
+            </div>
+        </div>
+
+{% endblock %}
+
+{% block content %}
+
+    <!-- Destination Cards -->
+    <div class="container text-center">
+        <div class="row">
+
+
+            <!-- Card Loop -->
+
+            {% for destination in destinations %}
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card tri-card" style="width: 18rem;">
+                    <img src="{{destination.image}}" class="card-img-top tri-img" alt="italy.jpg">
+                    <div class="card-body tri-card-content">
+                        <h5 class="card-title">{{destination.name}}</h5>
+                        <p class="card-text">{{destination.description}}</p>
+                        <a href = "{{url_for('destination.show', id=destination.id)}}" class="btn btn-primary">Book Now</a>
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+
+
+        </div>
+    </div>
+
+
+    <div class="container text-center p-0 m-0">
+        <div class="row">
+            <div class="col-12">
+                <div class="big-screen">
+                    <!-- <img class="bigboiimg" src="static/img/paving.jpg" alt="bigboi.jpg"> -->
+                    <br>
+                    <p class="col-md-12 fs-1">Putting the 'fun' in disfunctional since</p>
+                    <p class="col-md-12 paving-year">2003</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-3">
+                Column
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+                Column
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+                Column
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+                Column
+            </div>
+        </div>
+    </div>
+
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-12">
+                Column
+            </div>
+            <div class="col-12">
+                Column
+            </div>
+        </div>
+    </div>
+
+    
+{% endblock %}

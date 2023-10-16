@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block content %}
+
+<!-- destination card -->
+<div class="card mb-3 w-auto">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{{destination.image}}" class="img-fluid rounded-start" alt="location.jpg">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{destination.name}}</h5>
+        <p class="card-text">{{destination.description}}</p>
+        <button type="button" class="btn btn-primary">Book Now</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- comment section -->
+<div class="card w-auto">
+  <div class="card-body">
+    <h5 class="card-title">Comments</h5>
+  </div>
+  <ul class="list-group list-group-flush">
+    <!-- comment -->
+    <li class="list-group-item">
+      <div class="w-auto">
+        <div class="card-body">
+          <!-- comment form inline with comments-->
+          <p class="card-text">{{render_form(form,"/destinations/{0}/comment".format(destination.id))}}</div>
+    </li>
+    <!-- comment -->
+    {% for comment in destination.comments %}
+    <li class="list-group-item">
+      <div class="w-auto">
+        <div class="card-body">
+          <h5 class="card-title">{{comment.user.name}}</h5>
+          <p class="card-text">{{comment.text}}</p>
+        </div>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% endblock %}
